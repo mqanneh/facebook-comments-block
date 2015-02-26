@@ -105,7 +105,7 @@ function facebook_comments_block_block_content() {
   $url = $base_url . '/' . current_path();
   
   $facebook_app_id = variable_get('facebook_comments_settings_app_id', '');
-  $facebook_app_id_script = ($facebook_app_id != '') ? "&appId=$facebook_app_id" : '';
+  $facebook_app_id_script = (($facebook_app_id != '') ? "&appId=$facebook_app_id" : '') . '";';
   
   $facebook_script = '<div id="fb-root"></div>
     <script>(function(d, s, id) {
