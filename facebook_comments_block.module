@@ -30,6 +30,14 @@ function facebook_comments_block_block_configure($delta='') {
         '#description' => t('Configure facebook comments box.'),
         '#collapsible' => FALSE,
       );
+      $form['facebook_comments_settings']['facebook_comments_settings_app_id'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Facebook Application ID'),
+        '#default_value' => variable_get('facebook_comments_settings_app_id', ''),
+        '#maxlength' => 20,
+        '#description' => t('Optional: Enter Facebook App ID.'),
+        '#required' => FALSE,
+      );
       $form['facebook_comments_settings']['facebook_comments_settings_color_schema'] = array(
         '#type' => 'select',
         '#title' => t('Color Scheme'),
@@ -68,6 +76,7 @@ function facebook_comments_block_block_configure($delta='') {
 function facebook_comments_block_block_save($delta = '', $edit = array()) {
   switch($delta) {
     case 'fb_comments' :
+      variable_set('facebook_comments_settings_app_id', $edit['facebook_comments_settings_app_id']);
       variable_set('facebook_comments_settings_color_schema', $edit['facebook_comments_settings_color_schema']);
       variable_set('facebook_comments_settings_width', $edit['facebook_comments_settings_width']);
       variable_set('facebook_comments_settings_number_of_posts', $edit['facebook_comments_settings_number_of_posts']);
@@ -82,12 +91,10 @@ function facebook_comments_block_block_view($delta='') {
   $block = array();
   switch($delta) {
     case 'fb_comments' :
-      if (variable_get('facebook_comments_settings_enabled', FALSE)) {
-        $block = array(
-          'subject' => t('Facebook comments'),
-          'content' => facebook_comments_block_block_content(),
-        );
-      }
+      $block = array(
+        'subject' => t('Facebook comments'),
+        'content' => facebook_comments_block_block_content(),
+      );
     break;
   }
   return $block;
@@ -97,12 +104,15 @@ function facebook_comments_block_block_content() {
   global $base_url;
   $url = $base_url . '/' . current_path();
   
+  $facebook_app_id = variable_get('facebook_comments_settings_app_id', '');
+  $facebook_app_id_script = ($facebook_app_id != '') ? "&appId=$facebook_app_id" : '';
+  
   $facebook_script = '<div id="fb-root"></div>
     <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {return;}
       js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1'.$facebook_app_id_script.'
       fjs.parentNode.insertBefore(js, fjs);
     }(document, "script", "facebook-jssdk"));</script>';
   

@@ -2,4 +2,5 @@ name = Facebook Comments Block
 description = Create a configurable block to display Facebook comments widget.
 core = 7.x
 version = 7.x-1.0
+package = Social
 dependencies[] = block
