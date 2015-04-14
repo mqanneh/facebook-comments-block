@@ -122,7 +122,7 @@ function facebook_comments_block_block_view($delta = '') {
  * - $facebook_comments_block_settings_number_of_posts.
  * - $facebook_comments_block_settings_color_schema.
  *
- * @see templates/facebook_comments_block.tpl.php.
+ * @see facebook_comments_block.tpl.php.
  */
 function template_preprocess_facebook_comments_block(&$variables) {
   global $base_url;

@@ -12,7 +12,8 @@
  * - $facebook_comments_block_settings_width: The width of the plugin.
  * - $facebook_comments_block_settings_number_of_posts: The number of comments
  *   to show by default.
- * - $facebook_comments_block_settings_color_schema: The color scheme used by the plugin.
+ * - $facebook_comments_block_settings_color_schema:
+ *   The color scheme used by the plugin.
  *
  * @see template_preprocess()
  */
