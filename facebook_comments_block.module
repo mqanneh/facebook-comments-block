@@ -101,8 +101,7 @@ function facebook_comments_block_block_view($delta = '') {
 }
 
 /**
- * Function facebook_comments_block_block_content()
- * this will render the block output.
+ * Function facebook_comments_block_block_content(), this will render the block output.
  */
 function facebook_comments_block_block_content() {
   global $base_url;
