@@ -90,8 +90,8 @@ function facebook_comments_block_block_save($delta = '', $edit = array()) {
 function facebook_comments_block_theme() {
   return array(
     'facebook_comments_block' => array(
-      'template' => 'templates/facebook-comments-theme'
-    )
+      'template' => 'templates/facebook-comments-theme',
+    ),
   );
 }
 
@@ -112,19 +112,19 @@ function facebook_comments_block_block_view($delta = '') {
 }
 
 /**
- * Processes variables for facebook_comments_block.tpl.php
+ * Processes variables for facebook_comments_block.tpl.php.
  *
  * The $variables array contains the following arguments:
- * - $url
- * - $facebook_app_id
- * - $facebook_app_id_script
- * - $facebook_comments_block_settings_width
- * - $facebook_comments_block_settings_number_of_posts
- * - $facebook_comments_block_settings_color_schema
+ * - $url.
+ * - $facebook_app_id.
+ * - $facebook_app_id_script.
+ * - $facebook_comments_block_settings_width.
+ * - $facebook_comments_block_settings_number_of_posts.
+ * - $facebook_comments_block_settings_color_schema.
  *
- * @see templates/facebook_comments_block.tpl.php
+ * @see templates/facebook_comments_block.tpl.php.
  */
-function template_preprocess_facebook_comments_block(&$variables){
+function template_preprocess_facebook_comments_block(&$variables) {
   global $base_url;
   $url = $base_url . '/' . current_path();
 
