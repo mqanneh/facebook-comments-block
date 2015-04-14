@@ -12,55 +12,55 @@ function facebook_comments_block_block_info() {
   $blocks['fb_comments'] = array(
     'info' => t('Facebook Comments'),
   );
-  
+
   return $blocks;
 }
 
 /**
  * Implements hook_block_configure().
  */
-function facebook_comments_block_block_configure($delta='') {
+function facebook_comments_block_block_configure($delta = '') {
   $form = array();
-  
-  switch($delta) {
-    case 'fb_comments' :
+
+  switch ($delta) {
+    case 'fb_comments':
       $form['facebook_comments_settings'] = array(
         '#type' => 'fieldset',
         '#title' => t('Facebook comments box settings'),
         '#description' => t('Configure facebook comments box.'),
         '#collapsible' => FALSE,
       );
-      $form['facebook_comments_settings']['facebook_comments_settings_app_id'] = array(
+      $form['facebook_comments_settings']['facebook_comments_block_settings_app_id'] = array(
         '#type' => 'textfield',
         '#title' => t('Facebook Application ID'),
-        '#default_value' => variable_get('facebook_comments_settings_app_id', ''),
+        '#default_value' => variable_get('facebook_comments_block_settings_app_id', ''),
         '#maxlength' => 20,
         '#description' => t('Optional: Enter Facebook App ID.'),
         '#required' => FALSE,
       );
-      $form['facebook_comments_settings']['facebook_comments_settings_color_schema'] = array(
+      $form['facebook_comments_settings']['facebook_comments_block_settings_color_schema'] = array(
         '#type' => 'select',
         '#title' => t('Color Scheme'),
         '#options' => array(
           'light' => t('Light'),
           'dark' => t('Dark'),
         ),
-        '#default_value' => variable_get('facebook_comments_settings_color_schema', 'light'),
+        '#default_value' => variable_get('facebook_comments_block_settings_color_schema', 'light'),
         '#description' => t('Set the color schema of facebook comments box.'),
         '#required' => TRUE,
       );
-      $form['facebook_comments_settings']['facebook_comments_settings_number_of_posts'] = array(
+      $form['facebook_comments_settings']['facebook_comments_block_settings_number_of_posts'] = array(
         '#type' => 'textfield',
         '#title' => t('Number of posts'),
-        '#default_value' => variable_get('facebook_comments_settings_number_of_posts', '5'),
+        '#default_value' => variable_get('facebook_comments_block_settings_number_of_posts', '5'),
         '#maxlength' => 1,
         '#description' => t('Select how many posts tou want to display by default.'),
         '#required' => TRUE,
       );
-      $form['facebook_comments_settings']['facebook_comments_settings_width'] = array(
+      $form['facebook_comments_settings']['facebook_comments_block_settings_width'] = array(
         '#type' => 'textfield',
         '#title' => t('Width'),
-        '#default_value' => variable_get('facebook_comments_settings_width', '500'),
+        '#default_value' => variable_get('facebook_comments_block_settings_width', '500'),
         '#maxlength' => 3,
         '#description' => t('Set width of facebook comments box.'),
         '#required' => TRUE,
@@ -74,12 +74,12 @@ function facebook_comments_block_block_configure($delta='') {
  * Implements hook_block_save().
  */
 function facebook_comments_block_block_save($delta = '', $edit = array()) {
-  switch($delta) {
-    case 'fb_comments' :
-      variable_set('facebook_comments_settings_app_id', $edit['facebook_comments_settings_app_id']);
-      variable_set('facebook_comments_settings_color_schema', $edit['facebook_comments_settings_color_schema']);
-      variable_set('facebook_comments_settings_width', $edit['facebook_comments_settings_width']);
-      variable_set('facebook_comments_settings_number_of_posts', $edit['facebook_comments_settings_number_of_posts']);
+  switch ($delta) {
+    case 'fb_comments':
+      variable_set('facebook_comments_block_settings_app_id', $edit['facebook_comments_block_settings_app_id']);
+      variable_set('facebook_comments_block_settings_color_schema', $edit['facebook_comments_block_settings_color_schema']);
+      variable_set('facebook_comments_block_settings_width', $edit['facebook_comments_block_settings_width']);
+      variable_set('facebook_comments_block_settings_number_of_posts', $edit['facebook_comments_block_settings_number_of_posts']);
       break;
   }
 }
@@ -87,40 +87,44 @@ function facebook_comments_block_block_save($delta = '', $edit = array()) {
 /**
  * Implements hook_block_configure().
  */
-function facebook_comments_block_block_view($delta='') {
+function facebook_comments_block_block_view($delta = '') {
   $block = array();
-  switch($delta) {
-    case 'fb_comments' :
+  switch ($delta) {
+    case 'fb_comments':
       $block = array(
         'subject' => t('Facebook comments'),
         'content' => facebook_comments_block_block_content(),
       );
-    break;
+      break;
   }
   return $block;
 }
 
+/**
+ * Function facebook_comments_block_block_content()
+ * this will render the block output.
+ */
 function facebook_comments_block_block_content() {
   global $base_url;
   $url = $base_url . '/' . current_path();
-  
-  $facebook_app_id = variable_get('facebook_comments_settings_app_id', '');
+
+  $facebook_app_id = variable_get('facebook_comments_block_settings_app_id', '');
   $facebook_app_id_script = (($facebook_app_id != '') ? "&appId=$facebook_app_id" : '') . '";';
-  
+
   $facebook_script = '<div id="fb-root"></div>
     <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {return;}
       js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1'.$facebook_app_id_script.'
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1' . $facebook_app_id_script . '
       fjs.parentNode.insertBefore(js, fjs);
     }(document, "script", "facebook-jssdk"));</script>';
-  
+
   $block = array(
     'fb_comment_box' => array(
       '#prefix' => '',
       '#type' => 'markup',
-      '#markup' => $facebook_script . '<div class="fb-comments" data-href="'.$url.'" data-width="'.variable_get('facebook_comments_settings_width', '500').'" data-numposts="'.variable_get('facebook_comments_settings_number_of_posts', '5').'" data-colorscheme="'.variable_get('facebook_comments_settings_color_schema', 'light').'"></div>',
+      '#markup' => $facebook_script . '<div class="fb-comments" data-href="' . $url . '" data-width="' . variable_get('facebook_comments_block_settings_width', '500') . '" data-numposts="' . variable_get('facebook_comments_block_settings_number_of_posts', '5') . '" data-colorscheme="' . variable_get('facebook_comments_block_settings_color_schema', 'light') . '"></div>',
       '#weight' => 1000,
     ),
   );
