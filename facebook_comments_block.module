@@ -85,6 +85,17 @@ function facebook_comments_block_block_save($delta = '', $edit = array()) {
 }
 
 /**
+ * Implements hook_theme().
+ */
+function facebook_comments_block_theme() {
+  return array(
+    'facebook_comments_block' => array(
+      'template' => 'templates/facebook-comments-theme'
+    )
+  );
+}
+
+/**
  * Implements hook_block_configure().
  */
 function facebook_comments_block_block_view($delta = '') {
@@ -93,7 +104,7 @@ function facebook_comments_block_block_view($delta = '') {
     case 'fb_comments':
       $block = array(
         'subject' => t('Facebook comments'),
-        'content' => facebook_comments_block_block_content(),
+        'content' => theme('facebook_comments_block'),
       );
       break;
   }
@@ -101,32 +112,29 @@ function facebook_comments_block_block_view($delta = '') {
 }
 
 /**
- * Helper function to render the block output.
+ * Processes variables for facebook_comments_block.tpl.php
+ *
+ * The $variables array contains the following arguments:
+ * - $url
+ * - $facebook_app_id
+ * - $facebook_app_id_script
+ * - $facebook_comments_block_settings_width
+ * - $facebook_comments_block_settings_number_of_posts
+ * - $facebook_comments_block_settings_color_schema
+ *
+ * @see templates/facebook_comments_block.tpl.php
  */
-function facebook_comments_block_block_content() {
+function template_preprocess_facebook_comments_block(&$variables){
   global $base_url;
   $url = $base_url . '/' . current_path();
 
   $facebook_app_id = variable_get('facebook_comments_block_settings_app_id', '');
   $facebook_app_id_script = (($facebook_app_id != '') ? "&appId=$facebook_app_id" : '') . '";';
 
-  $facebook_script = '<div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1' . $facebook_app_id_script . '
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, "script", "facebook-jssdk"));</script>';
-
-  $block = array(
-    'fb_comment_box' => array(
-      '#prefix' => '',
-      '#type' => 'markup',
-      '#markup' => $facebook_script . '<div class="fb-comments" data-href="' . $url . '" data-width="' . variable_get('facebook_comments_block_settings_width', '500') . '" data-numposts="' . variable_get('facebook_comments_block_settings_number_of_posts', '5') . '" data-colorscheme="' . variable_get('facebook_comments_block_settings_color_schema', 'light') . '"></div>',
-      '#weight' => 1000,
-    ),
-  );
-
-  return $block;
+  $variables['url'] = $url;
+  $variables['facebook_app_id'] = $facebook_app_id;
+  $variables['facebook_app_id_script'] = $facebook_app_id_script;
+  $variables['facebook_comments_block_settings_width'] = variable_get('facebook_comments_block_settings_width', '500');
+  $variables['facebook_comments_block_settings_number_of_posts'] = variable_get('facebook_comments_block_settings_number_of_posts', '5');
+  $variables['facebook_comments_block_settings_color_schema'] = variable_get('facebook_comments_block_settings_color_schema', 'light');
 }
