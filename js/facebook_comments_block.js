@@ -1,8 +1,9 @@
 /**
  * @file
- * facebook_comments_block
+ * Facebook comments block module related scripts.
  *
  */
+
 var facebook_app_id_script = Drupal.settings.facebook_comments_block.facebook_settings.facebook_app_id_script;
 (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
