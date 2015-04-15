@@ -1,4 +1,5 @@
-/*
+/**
+ * @file
  * facebook_comments_block
  *
  */
