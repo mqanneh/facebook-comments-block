@@ -1,7 +1,6 @@
 /**
  * @file
  * Facebook comments block module related scripts.
- *
  */
 
 var facebook_app_id_script = Drupal.settings.facebook_comments_block.facebook_settings.facebook_app_id_script;
