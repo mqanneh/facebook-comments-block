@@ -106,14 +106,17 @@ function facebook_comments_block_block_view($delta = '') {
   switch ($delta) {
     case 'fb_comments':
       $theme_vars = array();
+      $js_vars = array();
+
       global $base_url;
       $url = $base_url . '/' . current_path();
 
       $facebook_app_id = variable_get('facebook_comments_block_settings_app_id', '');
       $facebook_app_id_script = (($facebook_app_id != '') ? "&appId=$facebook_app_id" : '');
 
-      $theme_vars['facebook']['facebook_app_id'] = $facebook_app_id;
-      $theme_vars['facebook']['facebook_app_id_script'] = $facebook_app_id_script;
+      $js_vars['facebook_app_id'] = $facebook_app_id;
+      $js_vars['facebook_app_id_script'] = $facebook_app_id_script;
+
       $theme_vars['facebook']['data_attributes']['href'] = $url;
       $theme_vars['facebook']['data_attributes']['data-width'] = variable_get('facebook_comments_block_settings_width', '500');
       $theme_vars['facebook']['data_attributes']['data-numposts'] = variable_get('facebook_comments_block_settings_number_of_posts', '5');
@@ -123,6 +126,8 @@ function facebook_comments_block_block_view($delta = '') {
         'subject' => t('Facebook comments'),
         'content' => theme('facebook_comments__block', $theme_vars),
       );
+      drupal_add_js(array('facebook_comments_block' => array('facebook_settings' => $js_vars)), array('type' => 'setting'));
+      drupal_add_js(drupal_get_path('module', 'facebook_comments_block') . '/js/facebook_comments_block.js', array('scope' => 'footer', 'type' => 'file'));
       break;
   }
   return $block;
