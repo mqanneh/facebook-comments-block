@@ -105,22 +105,27 @@ function facebook_comments_block_block_view($delta = '') {
   $block = array();
   switch ($delta) {
     case 'fb_comments':
-      $theme_vars = array();
-      $js_vars = array();
-
       global $base_url;
       $url = $base_url . '/' . current_path();
 
       $facebook_app_id = variable_get('facebook_comments_block_settings_app_id', '');
       $facebook_app_id_script = (($facebook_app_id != '') ? "&appId=$facebook_app_id" : '');
 
-      $js_vars['facebook_app_id'] = $facebook_app_id;
-      $js_vars['facebook_app_id_script'] = $facebook_app_id_script;
+      $js_vars = array(
+        'facebook_app_id' => $facebook_app_id,
+        'facebook_app_id_script' => $facebook_app_id_script,
+      );
 
-      $theme_vars['facebook']['data_attributes']['href'] = $url;
-      $theme_vars['facebook']['data_attributes']['data-width'] = variable_get('facebook_comments_block_settings_width', '500');
-      $theme_vars['facebook']['data_attributes']['data-numposts'] = variable_get('facebook_comments_block_settings_number_of_posts', '5');
-      $theme_vars['facebook']['data_attributes']['data-colorscheme'] = variable_get('facebook_comments_block_settings_color_schema', 'light');
+      $theme_vars = array(
+        'facebook' => array(
+          'data_attributes' => array(
+            'href' => $url,
+            'data-width' => variable_get('facebook_comments_block_settings_width', '500'),
+            'data-numposts' => variable_get('facebook_comments_block_settings_number_of_posts', '5'),
+            'data-colorscheme' => variable_get('facebook_comments_block_settings_color_schema', 'light'),
+          ),
+        ),
+      );
 
       $block = array(
         'subject' => t('Facebook comments'),
