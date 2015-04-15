@@ -33,7 +33,7 @@ function facebook_comments_block_block_configure($delta = '') {
       $form['facebook_comments_settings']['facebook_comments_block_settings_app_id'] = array(
         '#type' => 'textfield',
         '#title' => t('Facebook Application ID'),
-        '#default_value' => check_plain(variable_get('facebook_comments_block_settings_app_id', '')),
+        '#default_value' => variable_get('facebook_comments_block_settings_app_id', ''),
         '#maxlength' => 20,
         '#description' => t('Optional: Enter Facebook App ID.'),
         '#required' => FALSE,
@@ -45,14 +45,14 @@ function facebook_comments_block_block_configure($delta = '') {
           'light' => t('Light'),
           'dark' => t('Dark'),
         ),
-        '#default_value' => check_plain(variable_get('facebook_comments_block_settings_color_schema', 'light')),
+        '#default_value' => variable_get('facebook_comments_block_settings_color_schema', 'light'),
         '#description' => t('Set the color schema of facebook comments box.'),
         '#required' => TRUE,
       );
       $form['facebook_comments_settings']['facebook_comments_block_settings_number_of_posts'] = array(
         '#type' => 'textfield',
         '#title' => t('Number of posts'),
-        '#default_value' => check_plain(variable_get('facebook_comments_block_settings_number_of_posts', '5')),
+        '#default_value' => variable_get('facebook_comments_block_settings_number_of_posts', '5'),
         '#maxlength' => 1,
         '#description' => t('Select how many posts tou want to display by default.'),
         '#required' => TRUE,
@@ -60,7 +60,7 @@ function facebook_comments_block_block_configure($delta = '') {
       $form['facebook_comments_settings']['facebook_comments_block_settings_width'] = array(
         '#type' => 'textfield',
         '#title' => t('Width'),
-        '#default_value' => check_plain(variable_get('facebook_comments_block_settings_width', '500')),
+        '#default_value' => variable_get('facebook_comments_block_settings_width', '500'),
         '#maxlength' => 3,
         '#description' => t('Set width of facebook comments box.'),
         '#required' => TRUE,
@@ -111,16 +111,16 @@ function facebook_comments_block_block_view($delta = '') {
       global $base_url;
       $url = $base_url . '/' . current_path();
 
-      $facebook_app_id = check_plain(variable_get('facebook_comments_block_settings_app_id', ''));
+      $facebook_app_id = variable_get('facebook_comments_block_settings_app_id', '');
       $facebook_app_id_script = (($facebook_app_id != '') ? "&appId=$facebook_app_id" : '');
 
       $js_vars['facebook_app_id'] = $facebook_app_id;
       $js_vars['facebook_app_id_script'] = $facebook_app_id_script;
 
       $theme_vars['facebook']['data_attributes']['href'] = $url;
-      $theme_vars['facebook']['data_attributes']['data-width'] = check_plain(variable_get('facebook_comments_block_settings_width', '500'));
-      $theme_vars['facebook']['data_attributes']['data-numposts'] = check_plain(variable_get('facebook_comments_block_settings_number_of_posts', '5'));
-      $theme_vars['facebook']['data_attributes']['data-colorscheme'] = check_plain(variable_get('facebook_comments_block_settings_color_schema', 'light'));
+      $theme_vars['facebook']['data_attributes']['data-width'] = variable_get('facebook_comments_block_settings_width', '500');
+      $theme_vars['facebook']['data_attributes']['data-numposts'] = variable_get('facebook_comments_block_settings_number_of_posts', '5');
+      $theme_vars['facebook']['data_attributes']['data-colorscheme'] = variable_get('facebook_comments_block_settings_color_schema', 'light');
 
       $block = array(
         'subject' => t('Facebook comments'),
