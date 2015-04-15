@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for facebook comments block module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function facebook_comments_block_install() {
+  // Settings initial variables values.
+  variable_set('facebook_comments_block_settings_app_id', '');
+  variable_set('facebook_comments_block_settings_color_schema', 'light');
+  variable_set('facebook_comments_block_settings_width', '500');
+  variable_set('facebook_comments_block_settings_number_of_posts', '5');
+
+  // Clear the block cache.
+  cache_clear_all(NULL, 'cache_block');
+}
+
+/**
+ * Implements hook_enable().
+ */
+function facebook_comments_block_enable() {
+  // Clear the block cache.
+  cache_clear_all(NULL, 'cache_block');
+}
+
+/**
+ * Implements hook_disable().
+ */
+function facebook_comments_block_disable() {
+  // Clear the block cache.
+  cache_clear_all(NULL, 'cache_block');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function facebook_comments_block_uninstall() {
+  // Deleting defined variables by the module.
+  variable_del('facebook_comments_block_settings_app_id');
+  variable_del('facebook_comments_block_settings_color_schema');
+  variable_del('facebook_comments_block_settings_width');
+  variable_del('facebook_comments_block_settings_number_of_posts');
+
+  // Clear the block cache.
+  cache_clear_all(NULL, 'cache_block');
+}
