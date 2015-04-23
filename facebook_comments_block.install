@@ -5,30 +5,6 @@
  */
 
 /**
- * Implements hook_install().
- */
-function facebook_comments_block_install() {
-  // Clear the block cache.
-  cache_clear_all(NULL, 'cache_block');
-}
-
-/**
- * Implements hook_enable().
- */
-function facebook_comments_block_enable() {
-  // Clear the block cache.
-  cache_clear_all(NULL, 'cache_block');
-}
-
-/**
- * Implements hook_disable().
- */
-function facebook_comments_block_disable() {
-  // Clear the block cache.
-  cache_clear_all(NULL, 'cache_block');
-}
-
-/**
  * Implements hook_uninstall().
  */
 function facebook_comments_block_uninstall() {
@@ -37,7 +13,4 @@ function facebook_comments_block_uninstall() {
   variable_del('facebook_comments_block_settings_color_schema');
   variable_del('facebook_comments_block_settings_width');
   variable_del('facebook_comments_block_settings_number_of_posts');
-
-  // Clear the block cache.
-  cache_clear_all(NULL, 'cache_block');
 }
