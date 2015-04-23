@@ -17,6 +17,34 @@ function facebook_comments_block_block_info() {
 }
 
 /**
+ * Implements hook_block_info().
+ */
+function facebook_comments_block_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#facebook_comments_block':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This is a small module that add a new block "Facebook comments" with a facebook comments plugin configuration, this block will load the facebook comments widget for the current page being displayed in using the real path URL instead of path aliases or clean URLs.') . '</p>';
+      $output .= '<h3>' . t('Configuration') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t("This block can be enabled and configured on the <a href='@admin-block'>Blocks administration page</a>.", array('@admin-block' => url('admin/structure/block'))) . '</dt>';
+      $output .= '<dd>' . t("Find 'Facebook Comments' block and click on configure.") . '</a></dd>';
+      $output .= '<dt>' . t('Under the "FACEBOOK COMMENTS BOX SETTINGS" you can configure the following.') . '</dt>';
+      $output .= '<dd>' . t('Facebook Application ID: (Optional).') . '</dd>';
+      $output .= '<dd>' . t('Color Scheme: Set the color schema of facebook comments box.') . '</dd>';
+      $output .= '<dd>' . t('Number of posts: Select how many posts tou want to display by default.') . '</dd>';
+      $output .= '<dd>' . t('Width: Set width of facebook comments box.') . '</dd>';
+      $output .= '</dl>';
+      $output .= '<h3>' . t('Troubleshooting') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t('If the block did not appear:') . '</dt>';
+      $output .= '<dd>' . t("check if you have entered a correct FACEBOOK APP ID, leave it blank in case you don't have a Facebook app.") . '</a></dd>';
+      $output .= '</dl>';
+      return $output;
+  }
+}
+
+/**
  * Implements hook_block_configure().
  */
 function facebook_comments_block_block_configure($delta = '') {
