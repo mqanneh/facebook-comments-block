@@ -16,7 +16,7 @@ CONTENTS OF THIS FILE
    path URL instead of path aliases or clean URLs.
 
 * For a full description of the module, visit the project page:
-   https://www.drupal.org/sandbox/mqanneh/2441099
+   https://www.drupal.org/project/facebook_comments_block
 
 -- REQUIREMENTS --
 
@@ -49,3 +49,4 @@ CONTENTS OF THIS FILE
 
 Current maintainers:
 * Mohammad AlQanneh (mqanneh) - https://www.drupal.org/u/mqanneh
+
