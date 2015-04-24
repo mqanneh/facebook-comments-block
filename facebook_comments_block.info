@@ -5,3 +5,4 @@ package = Social
 dependencies[] = block
 
 configure = admin/structure/block/manage/facebook_comments_block/fb_comments/configure
+
