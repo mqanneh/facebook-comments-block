@@ -38,7 +38,9 @@ CONTENTS OF THIS FILE
 * Find "Facebook Comments" block and click on configure.
 * Under the "FACEBOOK COMMENTS BOX SETTINGS" you can configure the following:
   - Facebook Application ID: Optional.
-  - Color Scheme: Set the color schema of facebook comments box.
+  - Main domain: Optional: If you have more than one domain you can set the main domain
+    for facebook comments box to use the same commenting widget across all other domains.
+  - Color scheme: Set the color schema of facebook comments box.
   - Number of posts: Select how many posts tou want to display by default.
   - Width: Set width of facebook comments box.
 
@@ -46,7 +48,7 @@ CONTENTS OF THIS FILE
 
 * If the block did not appear:
 
-  - check if you have entered a correct FACEBOOK APP ID, 
+  - Check if you have entered a correct FACEBOOK APP ID,
     leave it blank in case you don't have a Facebook app.
 
 -- MAINTAINERS --
