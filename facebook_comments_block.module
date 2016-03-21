@@ -11,6 +11,7 @@ function facebook_comments_block_block_info() {
   $blocks = array();
   $blocks['fb_comments'] = array(
     'info' => t('Facebook Comments'),
+    'cache' => DRUPAL_NO_CACHE,
   );
 
   return $blocks;
