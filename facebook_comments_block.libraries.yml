@@ -5,3 +5,4 @@ facebook-comments-block:
   dependencies:
     - core/jquery
     - core/drupalSettings
+    - core/drupal
