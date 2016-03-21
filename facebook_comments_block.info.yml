@@ -1,9 +1,9 @@
 name: Facebook Comments Block
+type: module
 description: Create a configurable block to display Facebook comments widget.
 package: Social
 
-type: module
 core: 8.x
 
-dependencies: {  }
-
+dependencies:
+  - block
