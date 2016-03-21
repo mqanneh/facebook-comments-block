@@ -5,3 +5,16 @@
  * facebook_comments_block.module
  */
 
+/**
+ * Implements hook_theme().
+ */
+function facebook_comments_block_theme($existing, $type, $theme, $path) {
+  return array('facebook_comments_block_block' =>
+    array(
+      'variables' => array(
+        'data_attributes' => NULL,
+      ),
+      'template' => 'block--facebook-comments-block'
+    )
+  );
+}
