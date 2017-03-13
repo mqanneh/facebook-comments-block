@@ -260,13 +260,28 @@ function facebook_comments_block_block_configure($delta = '') {
         '#description' => t('Select how many posts you want to display by default.'),
         '#required' => TRUE,
       );
-      $form['facebook_comments_settings']['facebook_comments_block_settings_width'] = array(
-        '#type' => 'textfield',
+      $form['facebook_comments_settings']['facebook_comments_block_settings_width_unit'] = array(
+        '#type' => 'select',
         '#title' => t('Width'),
-        '#default_value' => variable_get('facebook_comments_block_settings_width', '500'),
-        '#maxlength' => 4,
+        '#options' => array(
+          'percentage' => t('100%'),
+          'pixel' => t('Pixels'),
+        ),
+        '#default_value' => variable_get('facebook_comments_block_settings_width_unit', 'percentage'),
         '#description' => t('Set width of facebook comments box.'),
         '#required' => TRUE,
+      );
+      $form['facebook_comments_settings']['facebook_comments_block_settings_width'] = array(
+        '#type' => 'textfield',
+        '#default_value' => variable_get('facebook_comments_block_settings_width', '500'),
+        '#maxlength' => 4,
+        '#description' => t('Enter the with in <em>px</em>.'),
+        '#required' => TRUE,
+        '#states' => array(
+          'visible' => array(
+            ':input[name="facebook_comments_block_settings_width_unit"]' => array('value' => 'pixel'),
+          ),
+        ),
       );
       break;
   }
@@ -296,6 +311,7 @@ function facebook_comments_block_block_save($delta = '', $edit = array()) {
       variable_set('facebook_comments_block_settings_lang', $edit['facebook_comments_block_settings_lang']);
       variable_set('facebook_comments_block_settings_color_schema', $edit['facebook_comments_block_settings_color_schema']);
       variable_set('facebook_comments_block_settings_order', $edit['facebook_comments_block_settings_order']);
+      variable_set('facebook_comments_block_settings_width_unit', $edit['facebook_comments_block_settings_width_unit']);
       variable_set('facebook_comments_block_settings_width', $edit['facebook_comments_block_settings_width']);
       variable_set('facebook_comments_block_settings_number_of_posts', $edit['facebook_comments_block_settings_number_of_posts']);
       break;
@@ -342,12 +358,20 @@ function facebook_comments_block_block_view($delta = '') {
         'facebook_app_lang' => $facebook_app_lang,
       );
 
+      $facebook_app_width_unit = variable_get('facebook_comments_block_settings_width_unit');
+      $facebook_app_width = '';
+      if ($facebook_app_width_unit == 'percentage') {
+        $facebook_app_width = '100%';
+      } else {
+        $facebook_app_width = variable_get('facebook_comments_block_settings_width', 500);
+      }
+
       $theme_vars = array(
         'facebook' => array(
           'data_attributes' => array(
             'href' => $url,
             'data-href' => $url,
-            'data-width' => variable_get('facebook_comments_block_settings_width', '500'),
+            'data-width' => $facebook_app_width,
             'data-numposts' => variable_get('facebook_comments_block_settings_number_of_posts', '5'),
             'data-colorscheme' => variable_get('facebook_comments_block_settings_color_schema', 'light'),
             'data-order-by' => variable_get('facebook_comments_block_settings_order', 'top'),
