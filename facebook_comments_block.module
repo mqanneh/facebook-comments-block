@@ -191,6 +191,7 @@ function facebook_comments_block_block_view($delta = '') {
         'facebook' => array(
           'data_attributes' => array(
             'href' => $url,
+            'data-href' => $url,
             'data-width' => variable_get('facebook_comments_block_settings_width', '500'),
             'data-numposts' => variable_get('facebook_comments_block_settings_number_of_posts', '5'),
             'data-colorscheme' => variable_get('facebook_comments_block_settings_color_schema', 'light'),
