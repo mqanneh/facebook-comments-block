@@ -13,5 +13,7 @@ function facebook_comments_block_uninstall() {
   variable_del('facebook_comments_block_settings_color_schema');
   variable_del('facebook_comments_block_settings_order');
   variable_del('facebook_comments_block_settings_width');
+  variable_del('facebook_comments_block_settings_domain');
+  variable_del('facebook_comments_block_settings_lang');
   variable_del('facebook_comments_block_settings_number_of_posts');
 }
