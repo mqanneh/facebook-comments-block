@@ -22,7 +22,8 @@ function facebook_comments_block_help($route_name, RouteMatchInterface $route_ma
       $output .= '<dd>' . t('Facebook Application ID: (Optional).') . '</dd>';
       $output .= '<dd>' . t('Main domain: (Optional) If you have more than one domain you can set the main domain for facebook comments box to use the same commenting widget across all other domains.') . '</dd>';
       $output .= '<dd>' . t('Color Scheme: Set the color schema of facebook comments box.') . '</dd>';
-      $output .= '<dd>' . t('Number of posts: Select how many posts tou want to display by default.') . '</dd>';
+      $output .= '<dd>' . t('Order of comments: Set the order of comments.') . '</dd>';
+      $output .= '<dd>' . t('Number of posts: Select how many posts you want to display by default.') . '</dd>';
       $output .= '<dd>' . t('Width: Set width of facebook comments box.') . '</dd>';
       $output .= '</dl>';
       $output .= '<h3>' . t('Troubleshooting') . '</h3>';

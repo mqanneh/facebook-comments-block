@@ -67,6 +67,18 @@ class FacebookCommentsBlock extends BlockBase {
         '#description' => $this->t('Set the color schema of facebook comments box.'),
         '#required' => TRUE,
       );
+      $form['facebook_comments_settings']['facebook_comments_block_settings_order'] = array(
+        '#type' => 'select',
+        '#title' => $this->t('Order of comments'),
+        '#options' => array(
+          'social' => t('Top'),
+          'reverse_time' => t('Newest'),
+          'time' => t('Oldest'),
+        ),
+        '#default_value' => isset($config['facebook_comments_block_settings_order']) ? $config['facebook_comments_block_settings_order'] : 'social',
+        '#description' => $this->t('Set the order of comments.'),
+        '#required' => TRUE,
+      );
       $form['facebook_comments_settings']['facebook_comments_block_settings_number_of_posts'] = array(
         '#type' => 'textfield',
         '#title' => $this->t('Number of posts'),
@@ -94,6 +106,7 @@ class FacebookCommentsBlock extends BlockBase {
     $this->setConfigurationValue('facebook_comments_block_settings_app_id', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_app_id')));
     $this->setConfigurationValue('facebook_comments_block_settings_domain', rtrim(rtrim($form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_domain'))), '/'));
     $this->setConfigurationValue('facebook_comments_block_settings_color_schema', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_color_schema')));
+    $this->setConfigurationValue('facebook_comments_block_settings_order', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_order')));
     $this->setConfigurationValue('facebook_comments_block_settings_number_of_posts', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_number_of_posts')));
     $this->setConfigurationValue('facebook_comments_block_settings_width', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_width')));
   }
@@ -146,9 +159,11 @@ class FacebookCommentsBlock extends BlockBase {
     $theme_vars = array(
       'data_attributes' => array(
         'href' => $url,
+        'data-href' => $url,
         'data-width' => $config['facebook_comments_block_settings_width'],
         'data-numposts' => $config['facebook_comments_block_settings_number_of_posts'],
         'data-colorscheme' => $config['facebook_comments_block_settings_color_schema'],
+        'data-order-by' => $config['facebook_comments_block_settings_order'],
       ),
     );
 
