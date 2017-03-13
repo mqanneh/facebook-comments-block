@@ -48,3 +48,20 @@ function facebook_comments_block_theme($existing, $type, $theme, $path) {
     )
   );
 }
+
+/**
+ * Implements hook_page_attachments().
+ */
+function facebook_comments_block_page_attachments(array &$page) {
+  $config = \Drupal::config('block.block.facebookcommentsblock');
+  $facebook_app_id = $config->get('settings')['facebook_comments_block_settings_app_id'];
+  $facebook_app_id_meta = array(
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => array(
+      'property' => 'fb:app_id',
+      'content' => $facebook_app_id,
+    )
+  );
+  $page['#attached']['html_head'][] = [$facebook_app_id_meta, 'facebook_app_id_meta'];
+}
