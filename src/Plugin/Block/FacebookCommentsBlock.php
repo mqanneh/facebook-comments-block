@@ -231,15 +231,32 @@ class FacebookCommentsBlock extends BlockBase {
       '#default_value' => isset($config['facebook_comments_block_settings_number_of_posts']) ? $config['facebook_comments_block_settings_number_of_posts'] : '5',
       '#maxlength' => 3,
       '#description' => $this->t('Select how many posts you want to display by default.'),
+    );
+    $form['facebook_comments_settings']['facebook_comments_block_settings_width_unit'] = array(
+      '#type' => 'select',
+      '#title' => $this->t('Width'),
+      '#options' => array(
+        'percentage' => t('100%'),
+        'pixel' => t('Pixels'),
+      ),
+      '#default_value' => isset($config['facebook_comments_block_settings_width_unit']) ? $config['facebook_comments_block_settings_width_unit'] : 'percentage',
+      '#description' => $this->t('Set width of facebook comments box.'),
       '#required' => TRUE,
     );
     $form['facebook_comments_settings']['facebook_comments_block_settings_width'] = array(
       '#type' => 'textfield',
-      '#title' => $this->t('Width'),
       '#default_value' => isset($config['facebook_comments_block_settings_width']) ? $config['facebook_comments_block_settings_width'] : '500',
       '#maxlength' => 4,
-      '#description' => $this->t('Set width of facebook comments box.'),
+      '#description' => $this->t('Enter the with in <em>px</em>.'),
       '#required' => TRUE,
+      '#states' => array(
+        'visible' => array(
+          ':input[id="edit-settings-facebook-comments-settings-facebook-comments-block-settings-width-unit"]' => array('value' => 'pixel'),
+        ),
+        'required' => array(
+          ':input[id="edit-settings-facebook-comments-settings-facebook-comments-block-settings-width-unit"]' => array('value' => 'pixel'),
+        ),
+      ),
     );
 
     return $form;
@@ -255,6 +272,7 @@ class FacebookCommentsBlock extends BlockBase {
     $this->setConfigurationValue('facebook_comments_block_settings_color_schema', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_color_schema')));
     $this->setConfigurationValue('facebook_comments_block_settings_order', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_order')));
     $this->setConfigurationValue('facebook_comments_block_settings_number_of_posts', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_number_of_posts')));
+    $this->setConfigurationValue('facebook_comments_block_settings_width_unit', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_width_unit')));
     $this->setConfigurationValue('facebook_comments_block_settings_width', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_width')));
   }
 
@@ -271,13 +289,13 @@ class FacebookCommentsBlock extends BlockBase {
     $number_of_posts = $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_number_of_posts'));
     if (!is_numeric($number_of_posts)) {
       drupal_set_message($this->t('Number of posts must be a valid number.'), 'error');
-      $form_state->setErrorByName('facebook_comments_block_settings_domain', $this->t('Number of posts must be a valid number.'));
+      $form_state->setErrorByName('facebook_comments_block_settings_number_of_posts', $this->t('Number of posts must be a valid number.'));
     }
 
     $width = $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_width'));
     if (!is_numeric($width)) {
       drupal_set_message($this->t('Width must be a valid number.'), 'error');
-      $form_state->setErrorByName('facebook_comments_block_settings_domain', $this->t('Width must be a valid number.'));
+      $form_state->setErrorByName('facebook_comments_block_settings_width', $this->t('Width must be a valid number.'));
     }
   }
 
@@ -306,11 +324,19 @@ class FacebookCommentsBlock extends BlockBase {
       'facebook_app_lang' => $facebook_app_lang,
     );
 
+    $facebook_app_width_unit = $config['facebook_comments_block_settings_width_unit'];
+    $facebook_app_width = '';
+    if ($facebook_app_width_unit == 'percentage') {
+      $facebook_app_width = '100%';
+    } else {
+      $facebook_app_width = $config['facebook_comments_block_settings_width'];
+    }
+
     $theme_vars = array(
       'data_attributes' => array(
         'href' => $url,
         'data-href' => $url,
-        'data-width' => $config['facebook_comments_block_settings_width'],
+        'data-width' => $facebook_app_width,
         'data-numposts' => $config['facebook_comments_block_settings_number_of_posts'],
         'data-colorscheme' => $config['facebook_comments_block_settings_color_schema'],
         'data-order-by' => $config['facebook_comments_block_settings_order'],
