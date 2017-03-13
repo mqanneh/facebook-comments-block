@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\facebook_comments_block\Plugin\Block\FacebookCommentsBlock.
- */
-
 namespace Drupal\facebook_comments_block\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
