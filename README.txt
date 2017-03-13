@@ -41,6 +41,7 @@ CONTENTS OF THIS FILE
   - Facebook Application ID: Optional.
   - Main domain: Optional: If you have more than one domain you can set the main domain
     for facebook comments box to use the same commenting widget across all other domains.
+  - Language: Select the default language of the comments plugin.
   - Color scheme: Set the color schema of facebook comments box.
   - Order of comments: Set the order of comments.
   - Number of posts: Select how many posts you want to display by default.
