@@ -41,7 +41,8 @@ CONTENTS OF THIS FILE
   - Main domain: Optional: If you have more than one domain you can set the main domain
     for facebook comments box to use the same commenting widget across all other domains.
   - Color scheme: Set the color schema of facebook comments box.
-  - Number of posts: Select how many posts tou want to display by default.
+  - Order of comments: Set the order of comments.
+  - Number of posts: Select how many posts you want to display by default.
   - Width: Set width of facebook comments box.
 
 -- TROUBLESHOOTING --
@@ -55,4 +56,3 @@ CONTENTS OF THIS FILE
 
 Current maintainers:
 * Mohammad AlQanneh (mqanneh) - https://www.drupal.org/u/mqanneh
-
