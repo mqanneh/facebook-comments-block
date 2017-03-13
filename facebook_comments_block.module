@@ -281,6 +281,9 @@ function facebook_comments_block_block_configure($delta = '') {
           'visible' => array(
             ':input[name="facebook_comments_block_settings_width_unit"]' => array('value' => 'pixel'),
           ),
+          'required' => array(
+            ':input[name="facebook_comments_block_settings_width_unit"]' => array('value' => 'pixel'),
+          ),
         ),
       );
       break;
