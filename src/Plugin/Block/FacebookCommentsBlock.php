@@ -306,13 +306,14 @@ class FacebookCommentsBlock extends BlockBase {
     global $base_url;
     $config = $this->getConfiguration();
     $current_unaliased_path = \Drupal::service('path.current')->getPath();
+    $current_aliased_path = \Drupal::service('path.alias_manager')->getAliasByPath($current_unaliased_path);
 
     $main_domain = $base_url;
     if ($config['facebook_comments_block_settings_domain'] !== '') {
       $main_domain = $config['facebook_comments_block_settings_domain'];
     }
 
-    $url = $main_domain . $current_unaliased_path;
+    $url = $main_domain . $current_aliased_path;
 
     $facebook_app_id = $config['facebook_comments_block_settings_app_id'];
     $facebook_app_id_script = ($facebook_app_id != '') ? "&appId=$facebook_app_id" : '';

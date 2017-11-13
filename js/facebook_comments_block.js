@@ -16,7 +16,7 @@
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) {return;}
         js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/" + facebook_app_lang + "/sdk.js#xfbml=1&version=v2.8" + facebook_app_id_script;
+        js.src = "//connect.facebook.net/" + facebook_app_lang + "/sdk.js#xfbml=1&version=v2.11" + facebook_app_id_script;
         fjs.parentNode.insertBefore(js, fjs);
       }(document, "script", "facebook-jssdk"));
     }
