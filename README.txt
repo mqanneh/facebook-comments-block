@@ -12,12 +12,7 @@ CONTENTS OF THIS FILE
 
 * This module allows users to comment using Facebook's commenting box
   with as little configuration as possible. It adds a new block "Facebook Comments"
-  which acts as a Facebook commenting widget. What makes this module different from
-  the ones that already exist on Drupal, is:
-  - Unlike other modules, Facebook Comments Block uses real path URL instead of path aliases
-    or clean URLs, this is specially important because this would preserve existing comments on
-    a page even after the page's URL is changed.
-  - Simple configuration process, the entire process takes minutes to install and configure.
+  which acts as a Facebook commenting widget. It has a simple configuration process, the entire process takes minutes to install and configure.
 
 * For a full description of the module, visit the project page:
   https://www.drupal.org/project/facebook_comments_block
