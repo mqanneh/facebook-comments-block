@@ -44,6 +44,8 @@ function facebook_comments_block_theme($existing, $type, $theme, $path) {
     array(
       'variables' => array(
         'data_attributes' => NULL,
+        'facebook_app_id' => NULL,
+        'facebook_app_lang' => NULL,
       ),
       'template' => 'block--facebook-comments-block'
     )

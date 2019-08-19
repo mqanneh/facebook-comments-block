@@ -319,12 +319,6 @@ class FacebookCommentsBlock extends BlockBase {
     $facebook_app_id_script = ($facebook_app_id != '') ? "&appId=$facebook_app_id" : '';
     $facebook_app_lang = $config['facebook_comments_block_settings_lang'];
 
-    $js_vars = array(
-      'facebook_app_id' => $facebook_app_id,
-      'facebook_app_id_script' => $facebook_app_id_script,
-      'facebook_app_lang' => $facebook_app_lang,
-    );
-
     $facebook_app_width_unit = $config['facebook_comments_block_settings_width_unit'];
     $facebook_app_width = '';
     if ($facebook_app_width_unit == 'percentage') {
@@ -342,6 +336,8 @@ class FacebookCommentsBlock extends BlockBase {
         'data-colorscheme' => $config['facebook_comments_block_settings_color_schema'],
         'data-order-by' => $config['facebook_comments_block_settings_order'],
       ),
+      'facebook_app_id' => $facebook_app_id_script,
+      'facebook_app_lang' => $facebook_app_lang,
     );
 
     return array(
@@ -350,14 +346,8 @@ class FacebookCommentsBlock extends BlockBase {
       ),
       '#theme' => 'facebook_comments_block_block',
       '#data_attributes' => new Attribute($theme_vars['data_attributes']),
-      '#attached' => array(
-        'library' =>  array(
-          'facebook_comments_block/facebook-comments-block',
-        ),
-        'drupalSettings' => array(
-          'facebook_comments_block_settings' => $js_vars,
-        ),
-      ),
+      '#facebook_app_id' => $theme_vars['facebook_app_id'],
+      '#facebook_app_lang' => $theme_vars['facebook_app_lang'],
     );
   }
 

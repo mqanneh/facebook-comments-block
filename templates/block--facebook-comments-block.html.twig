@@ -1,4 +1,7 @@
 <div id="fb-root"></div>
+{% if facebook_app_lang and facebook_app_id %}
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/{{ facebook_app_lang }}/sdk.js#xfbml=1&version=v4.0{{ facebook_app_id }}&autoLogAppEvents=1"></script>
+{% endif %}
 {% if data_attributes %}
-<div class="fb-comments" {{ data_attributes }}></div>
+  <div class="fb-comments" {{ data_attributes }}></div>
 {% endif %}
