@@ -4,7 +4,9 @@
  * @file
  * facebook_comments_block.module
  */
+
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_help().
@@ -17,7 +19,7 @@ function facebook_comments_block_help($route_name, RouteMatchInterface $route_ma
       $output .= '<p>' . t('This module allows users to comment using Facebook\'s commenting box with as little configuration as possible. It adds a new block "Facebook Comments" which acts as a Facebook commenting widget.') . '</p>';
       $output .= '<h3>' . t('Configuration') . '</h3>';
       $output .= '<dl>';
-      $output .= '<dt>' . t('You can place a facebook comment block in a region by selecting <em>Place block</em> on the <a href=":blocks">Block layout page</a>.', array(':blocks' => \Drupal::url('block.admin_display'))) . '</dt>';
+      $output .= '<dt>' . t('You can place a facebook comment block in a region by selecting <em>Place block</em> on the <a href=":blocks">Block layout page</a>.', array(':blocks' => Url::fromRoute('block.admin_display')->toString())) . '</dt>';
       $output .= '<dt>' . t('Under the "FACEBOOK COMMENTS BOX SETTINGS" you can configure the following.') . '</dt>';
       $output .= '<dd>' . t('Facebook Application ID: (Optional).') . '</dd>';
       $output .= '<dd>' . t('Main domain: (Optional) If you have more than one domain you can set the main domain for facebook comments box to use the same commenting widget across all other domains.') . '</dd>';

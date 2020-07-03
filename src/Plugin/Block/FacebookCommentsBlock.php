@@ -282,19 +282,19 @@ class FacebookCommentsBlock extends BlockBase {
   public function blockValidate($form, FormStateInterface $form_state) {
     $main_domain = $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_domain'));
     if ($main_domain !== '' && (!UrlHelper::isValid($main_domain, TRUE))) {
-      drupal_set_message($this->t('Main domain must be a valid absolute URL.'), 'error');
+      $this->messenger()->addError($this->t('Main domain must be a valid absolute URL.'));
       $form_state->setErrorByName('facebook_comments_block_settings_domain', $this->t('Main domain must be a valid absolute URL.'));
     }
 
     $number_of_posts = $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_number_of_posts'));
     if (!is_numeric($number_of_posts)) {
-      drupal_set_message($this->t('Number of posts must be a valid number.'), 'error');
+      $this->messenger()->addError($this->t('Number of posts must be a valid number.'));
       $form_state->setErrorByName('facebook_comments_block_settings_number_of_posts', $this->t('Number of posts must be a valid number.'));
     }
 
     $width = $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_width'));
     if (!is_numeric($width)) {
-      drupal_set_message($this->t('Width must be a valid number.'), 'error');
+      $this->messenger()->addError($this->t('Width must be a valid number.'));
       $form_state->setErrorByName('facebook_comments_block_settings_width', $this->t('Width must be a valid number.'));
     }
   }
@@ -306,7 +306,7 @@ class FacebookCommentsBlock extends BlockBase {
     global $base_url;
     $config = $this->getConfiguration();
     $current_unaliased_path = \Drupal::service('path.current')->getPath();
-    $current_aliased_path = \Drupal::service('path.alias_manager')->getAliasByPath($current_unaliased_path);
+    $current_aliased_path = \Drupal::service('path_alias.manager')->getAliasByPath($current_unaliased_path);
 
     $main_domain = $base_url;
     if ($config['facebook_comments_block_settings_domain'] !== '') {
