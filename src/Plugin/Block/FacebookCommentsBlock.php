@@ -217,9 +217,9 @@ class FacebookCommentsBlock extends BlockBase {
       '#type' => 'select',
       '#title' => $this->t('Order of comments'),
       '#options' => array(
-        'social' => t('Top'),
-        'reverse_time' => t('Newest'),
-        'time' => t('Oldest'),
+        'social' => $this->t('Top'),
+        'reverse_time' => $this->t('Newest'),
+        'time' => $this->t('Oldest'),
       ),
       '#default_value' => isset($config['facebook_comments_block_settings_order']) ? $config['facebook_comments_block_settings_order'] : 'social',
       '#description' => $this->t('Set the order of comments.'),
@@ -236,8 +236,8 @@ class FacebookCommentsBlock extends BlockBase {
       '#type' => 'select',
       '#title' => $this->t('Width'),
       '#options' => array(
-        'percentage' => t('100%'),
-        'pixel' => t('Pixels'),
+        'percentage' => $this->t('100%'),
+        'pixel' => $this->t('Pixels'),
       ),
       '#default_value' => isset($config['facebook_comments_block_settings_width_unit']) ? $config['facebook_comments_block_settings_width_unit'] : 'percentage',
       '#description' => $this->t('Set width of facebook comments box.'),
