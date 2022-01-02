@@ -3,7 +3,6 @@ type: module
 description: Create a configurable block to display Facebook comments widget.
 package: Social
 
-core: 8.x
 core_version_requirement: ^8 || ^9
 
 dependencies:

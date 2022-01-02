@@ -27,34 +27,33 @@ class FacebookCommentsBlock extends BlockBase {
    */
   public function blockForm($form, FormStateInterface $form_state) {
     $form = parent::blockForm($form, $form_state);
-
     $config = $this->getConfiguration();
 
-    $form['facebook_comments_settings'] = array(
+    $form['facebook_comments_settings'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Facebook comments box settings'),
       '#description' => $this->t('Configure facebook comments box.'),
       '#collapsible' => FALSE,
-    );
-    $form['facebook_comments_settings']['facebook_comments_block_settings_app_id'] = array(
+    ];
+    $form['facebook_comments_settings']['facebook_comments_block_settings_app_id'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Facebook Application ID'),
-      '#default_value' => isset($config['facebook_comments_block_settings_app_id']) ? $config['facebook_comments_block_settings_app_id'] : '',
+      '#default_value' => $config['facebook_comments_block_settings_app_id'] ?? '',
       '#maxlength' => 20,
       '#description' => $this->t('Optional: Enter Facebook App ID.'),
-    );
-    $form['facebook_comments_settings']['facebook_comments_block_settings_domain'] = array(
+    ];
+    $form['facebook_comments_settings']['facebook_comments_block_settings_domain'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Main domain'),
-      '#default_value' => isset($config['facebook_comments_block_settings_domain']) ? $config['facebook_comments_block_settings_domain'] : '',
+      '#default_value' => $config['facebook_comments_block_settings_domain'] ?? '',
       '#maxlength' => 75,
       '#description' => $this->t('Optional: If you have more than one domain you can set the main domain for facebook comments box to use the same commenting widget across all other domains.<br />ex: <i>http://www.mysite.com</i>'),
       '#required' => FALSE,
-    );
-    $form['facebook_comments_settings']['facebook_comments_block_settings_lang'] = array(
+    ];
+    $form['facebook_comments_settings']['facebook_comments_block_settings_lang'] = [
       '#type' => 'select',
       '#title' => $this->t('Language'),
-      '#options' => array(
+      '#options' => [
         'af_ZA' => $this->t('Afrikaans'),
         'ak_GH' => $this->t('Akan'),
         'am_ET' => $this->t('Amharic'),
@@ -197,67 +196,66 @@ class FacebookCommentsBlock extends BlockBase {
         'zh_TW' => $this->t('Traditional Chinese - Taiwan'),
         'zu_ZA' => $this->t('Zulu'),
         'zz_TR' => $this->t('Zazaki'),
-      ),
-      '#default_value' => isset($config['facebook_comments_block_settings_lang']) ? $config['facebook_comments_block_settings_lang'] : 'en_US',
+      ],
+      '#default_value' => $config['facebook_comments_block_settings_lang'] ?? 'en_US',
       '#description' => $this->t('Select the default language of the comments plugin.'),
       '#required' => TRUE,
-    );
-    $form['facebook_comments_settings']['facebook_comments_block_settings_color_schema'] = array(
+    ];
+    $form['facebook_comments_settings']['facebook_comments_block_settings_color_schema'] = [
       '#type' => 'select',
       '#title' => $this->t('Color scheme'),
-      '#options' => array(
+      '#options' => [
         'light' => $this->t('Light'),
         'dark' => $this->t('Dark'),
-      ),
-      '#default_value' => isset($config['facebook_comments_block_settings_color_schema']) ? $config['facebook_comments_block_settings_color_schema'] : 'light',
+      ],
+      '#default_value' => $config['facebook_comments_block_settings_color_schema'] ?? 'light',
       '#description' => $this->t('Set the color schema of facebook comments box.'),
       '#required' => TRUE,
-    );
-    $form['facebook_comments_settings']['facebook_comments_block_settings_order'] = array(
+    ];
+    $form['facebook_comments_settings']['facebook_comments_block_settings_order'] = [
       '#type' => 'select',
       '#title' => $this->t('Order of comments'),
-      '#options' => array(
-        'social' => $this->t('Top'),
+      '#options' => [
         'reverse_time' => $this->t('Newest'),
         'time' => $this->t('Oldest'),
-      ),
-      '#default_value' => isset($config['facebook_comments_block_settings_order']) ? $config['facebook_comments_block_settings_order'] : 'social',
+      ],
+      '#default_value' => $config['facebook_comments_block_settings_order'] ?? 'reverse_time',
       '#description' => $this->t('Set the order of comments.'),
       '#required' => TRUE,
-    );
-    $form['facebook_comments_settings']['facebook_comments_block_settings_number_of_posts'] = array(
+    ];
+    $form['facebook_comments_settings']['facebook_comments_block_settings_number_of_posts'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Number of posts'),
-      '#default_value' => isset($config['facebook_comments_block_settings_number_of_posts']) ? $config['facebook_comments_block_settings_number_of_posts'] : '5',
+      '#default_value' => $config['facebook_comments_block_settings_number_of_posts'] ?? '5',
       '#maxlength' => 3,
       '#description' => $this->t('Select how many posts you want to display by default.'),
-    );
-    $form['facebook_comments_settings']['facebook_comments_block_settings_width_unit'] = array(
+    ];
+    $form['facebook_comments_settings']['facebook_comments_block_settings_width_unit'] = [
       '#type' => 'select',
       '#title' => $this->t('Width'),
-      '#options' => array(
+      '#options' => [
         'percentage' => $this->t('100%'),
         'pixel' => $this->t('Pixels'),
-      ),
-      '#default_value' => isset($config['facebook_comments_block_settings_width_unit']) ? $config['facebook_comments_block_settings_width_unit'] : 'percentage',
+      ],
+      '#default_value' => $config['facebook_comments_block_settings_width_unit'] ?? 'percentage',
       '#description' => $this->t('Set width of facebook comments box.'),
       '#required' => TRUE,
-    );
-    $form['facebook_comments_settings']['facebook_comments_block_settings_width'] = array(
+    ];
+    $form['facebook_comments_settings']['facebook_comments_block_settings_width'] = [
       '#type' => 'textfield',
-      '#default_value' => isset($config['facebook_comments_block_settings_width']) ? $config['facebook_comments_block_settings_width'] : '500',
+      '#default_value' => $config['facebook_comments_block_settings_width'] ?? '500',
       '#maxlength' => 4,
       '#description' => $this->t('Enter the with in <em>px</em>.'),
       '#required' => TRUE,
-      '#states' => array(
-        'visible' => array(
-          ':input[id="edit-settings-facebook-comments-settings-facebook-comments-block-settings-width-unit"]' => array('value' => 'pixel'),
-        ),
-        'required' => array(
-          ':input[id="edit-settings-facebook-comments-settings-facebook-comments-block-settings-width-unit"]' => array('value' => 'pixel'),
-        ),
-      ),
-    );
+      '#states' => [
+        'visible' => [
+          ':input[id="edit-settings-facebook-comments-settings-facebook-comments-block-settings-width-unit"]' => ['value' => 'pixel'],
+        ],
+        'required' => [
+          ':input[id="edit-settings-facebook-comments-settings-facebook-comments-block-settings-width-unit"]' => ['value' => 'pixel'],
+        ],
+      ],
+    ];
 
     return $form;
   }
@@ -266,33 +264,36 @@ class FacebookCommentsBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
-    $this->setConfigurationValue('facebook_comments_block_settings_app_id', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_app_id')));
-    $this->setConfigurationValue('facebook_comments_block_settings_domain', rtrim(rtrim($form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_domain'))), '/'));
-    $this->setConfigurationValue('facebook_comments_block_settings_lang', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_lang')));
-    $this->setConfigurationValue('facebook_comments_block_settings_color_schema', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_color_schema')));
-    $this->setConfigurationValue('facebook_comments_block_settings_order', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_order')));
-    $this->setConfigurationValue('facebook_comments_block_settings_number_of_posts', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_number_of_posts')));
-    $this->setConfigurationValue('facebook_comments_block_settings_width_unit', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_width_unit')));
-    $this->setConfigurationValue('facebook_comments_block_settings_width', $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_width')));
+    $this->setConfiguration([
+      'facebook_comments_block_settings_app_id' => $form_state->getValue(['facebook_comments_settings', 'facebook_comments_block_settings_app_id']),
+      'facebook_comments_block_settings_domain' => rtrim(rtrim($form_state->getValue(['facebook_comments_settings', 'facebook_comments_block_settings_domain'])), '/'),
+      'facebook_comments_block_settings_lang' => $form_state->getValue(['facebook_comments_settings', 'facebook_comments_block_settings_lang']),
+      'facebook_comments_block_settings_color_schema' => $form_state->getValue(['facebook_comments_settings', 'facebook_comments_block_settings_color_schema']),
+      'facebook_comments_block_settings_order' => $form_state->getValue(['facebook_comments_settings', 'facebook_comments_block_settings_order']),
+      'facebook_comments_block_settings_number_of_posts' => $form_state->getValue(['facebook_comments_settings', 'facebook_comments_block_settings_number_of_posts']),
+      'facebook_comments_block_settings_width_unit' => $form_state->getValue(['facebook_comments_settings', 'facebook_comments_block_settings_width_unit']),
+      'facebook_comments_block_settings_width' => $form_state->getValue(['facebook_comments_settings', 'facebook_comments_block_settings_width']),
+    ]);
+
   }
 
   /**
    * {@inheritdoc}
    */
   public function blockValidate($form, FormStateInterface $form_state) {
-    $main_domain = $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_domain'));
+    $main_domain = $form_state->getValue(['facebook_comments_settings', 'facebook_comments_block_settings_domain']);
     if ($main_domain !== '' && (!UrlHelper::isValid($main_domain, TRUE))) {
       $this->messenger()->addError($this->t('Main domain must be a valid absolute URL.'));
       $form_state->setErrorByName('facebook_comments_block_settings_domain', $this->t('Main domain must be a valid absolute URL.'));
     }
 
-    $number_of_posts = $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_number_of_posts'));
+    $number_of_posts = $form_state->getValue(['facebook_comments_settings', 'facebook_comments_block_settings_number_of_posts']);
     if (!is_numeric($number_of_posts)) {
       $this->messenger()->addError($this->t('Number of posts must be a valid number.'));
       $form_state->setErrorByName('facebook_comments_block_settings_number_of_posts', $this->t('Number of posts must be a valid number.'));
     }
 
-    $width = $form_state->getValue(array('facebook_comments_settings', 'facebook_comments_block_settings_width'));
+    $width = $form_state->getValue(['facebook_comments_settings', 'facebook_comments_block_settings_width']);
     if (!is_numeric($width)) {
       $this->messenger()->addError($this->t('Width must be a valid number.'));
       $form_state->setErrorByName('facebook_comments_block_settings_width', $this->t('Width must be a valid number.'));
@@ -317,7 +318,7 @@ class FacebookCommentsBlock extends BlockBase {
 
     $facebook_app_id = $config['facebook_comments_block_settings_app_id'];
     $facebook_app_id_script = ($facebook_app_id != '') ? "&appId=$facebook_app_id" : '';
-    $facebook_app_lang = $config['facebook_comments_block_settings_lang'];
+    $facebook_app_lang = $config['facebook_comments_block_settings_lang'] ?? 'en_US';
 
     $facebook_app_width_unit = $config['facebook_comments_block_settings_width_unit'];
     $facebook_app_width = '';
@@ -327,28 +328,29 @@ class FacebookCommentsBlock extends BlockBase {
       $facebook_app_width = $config['facebook_comments_block_settings_width'];
     }
 
-    $theme_vars = array(
-      'data_attributes' => array(
+    $theme_vars = [
+      'data_attributes' => [
+        'data-mobile' => true,
         'href' => $url,
         'data-href' => $url,
         'data-width' => $facebook_app_width,
         'data-numposts' => $config['facebook_comments_block_settings_number_of_posts'],
         'data-colorscheme' => $config['facebook_comments_block_settings_color_schema'],
         'data-order-by' => $config['facebook_comments_block_settings_order'],
-      ),
+      ],
       'facebook_app_id' => $facebook_app_id_script,
       'facebook_app_lang' => $facebook_app_lang,
-    );
+    ];
 
-    return array(
-      '#cache' => array(
-        'contexts' => array('url'),
-      ),
+    return [
+      '#cache' => [
+        'contexts' => ['url'],
+      ],
       '#theme' => 'facebook_comments_block_block',
       '#data_attributes' => new Attribute($theme_vars['data_attributes']),
       '#facebook_app_id' => $theme_vars['facebook_app_id'],
       '#facebook_app_lang' => $theme_vars['facebook_app_lang'],
-    );
+    ];
   }
 
 }
