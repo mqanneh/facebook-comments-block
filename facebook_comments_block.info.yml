@@ -3,7 +3,7 @@ type: module
 description: Create a configurable block to display Facebook comments widget.
 package: Social
 
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^8 || ^9 || ^10
 
 dependencies:
   - drupal:block
